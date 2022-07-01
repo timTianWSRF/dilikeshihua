@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>添加</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+   <!-- 引入 layui.css-->
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+
+
+
+
+    <!-- 引入 layui.js-->
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<!--
+<body>
+<form class="layui-form" action="">
+  <div class="layui-form-item">
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">要素编号</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="id" placeholder="必填" autocomplete="" class="layui-input">
+    </div>
+
+  </div>
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">所属类别</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <div >
+      <select name="leixing" lay-verify="required">
+        <option value=""></option>
+        <option value="P">P</option>
+        <option value="L">L</option>
+        <option value="A">A</option>
+
+      </select>
+    </div>
+    </div>
+  </div>
+
+</div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">编码</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="coding" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">名称</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="name" autocomplete="必填" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">类型</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="typec" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">编号</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="node" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+
+     <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">等级</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="level" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">宽度</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="width" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">铺宽</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="pwidth" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">桥长</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="blength" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">净空高</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="jklength" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">载重吨数</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="ton" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">里程</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="kilo" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">比高</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="bigao" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">通行月份</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="cmonth" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">水深</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="wdeep" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">底质</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="dizhi" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">最小曲率半径</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="minbj" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">最大纵坡</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="maxzb" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">图形特征</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="spec" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+    <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">注记指针</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="zjzz" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">外挂表指针</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="wgbzz" autocomplete="" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+
+  <div class="layui-form-item">
+    <div class="layui-input-block">
+      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+      <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript" src="../static/tableupdate.js"></script>
+
+<script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    $.ajax({
+        url: '/../../add',
+        type: 'POST',
+        data:{
+            data:JSON.stringify(data.field)
+        },
+        success:function (data) {
+
+            console.log(data);
+            $.ajax({
+                url: '/../../database',
+            })
+        },
+         error: function (error) {
+             alert('出错了，请稍后重试')
+                                  },
+
+    });
+    return false;
+  });
+});
+</script>
+</body>
+-->
+<body>
+<form class="layui-form" action="" >
+  <div class="layui-form-item" id="addd">
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">要素编号</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="要素编号" placeholder="必填" autocomplete="" class="layui-input">
+    </div>
+
+  </div>
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">所属类别</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <div >
+      <select name="所属类别" lay-verify="required">
+        <option value=""></option>
+        <option value="P">P</option>
+        <option value="L">L</option>
+        <option value="A">A</option>
+
+      </select>
+    </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">编码</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="编码" placeholder="" autocomplete="" class="layui-input">
+    </div>
+
+
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 220px">名称</label>
+    <div class="layui-input-inline" style="width: 100px;">
+      <input type="text" name="名称" placeholder="" autocomplete="必填" class="layui-input">
+    </div>
+  </div>
+
+</div>
+
+  </div>
+
+</form>
+
+<script type="text/javascript" src="../static/downselect.js"></script>
+
+<script>
+ //   tableupdate();
+ var selectdoc = parent.$("#myid option:selected").text();
+ var selectsx = parent.$("#mytype option:selected").text();
+    $.ajax({
+        url:"/../../addpagecol",
+        type:'POST',
+        data:{
+                'doc':selectdoc,
+            'sx':selectsx,
+        },
+        success:function (data) {
+var da = JSON.parse(data);
+         //   console.log(da);
+         //   console.log(typeof da);
+            for(var i=4;i<da["data"].length;i++){
+                var curr = da["data"][i];
+                var html = '';
+                //$("#addd").append("<div class='layui-inline'> <label class='layui-form-label' style='width: 220px'>" + curr + "</label>" + "<div class='layui-input-inline' style='width: 100px;'> <input type='text' name='" + curr + "' placeholder='' autocomplete='' class='layui-input'> </div></div>")
+                html += "<div class='layui-inline'> <label class='layui-form-label' style='width: 220px'>" + curr + "</label>" + "<div class='layui-input-inline' style='width: 100px;'> <input type='text' name='" + curr + "' placeholder='' autocomplete='' class='layui-input'> </div></div>"
+
+            }
+            $("#addd").append(html);
+            $("#addd").append('<div class="layui-form-item">\n' +
+                '    <div class="layui-input-block">\n' +
+                '      <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>\n' +
+                '      <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+                '    </div>\n' +
+                '  </div>')
+        }
+    });
+    //$("#addd").append('<div class="layui-inline"> <label class="layui-form-label" style="width: 220px">名称</label><div class="layui-input-inline" style="width: 100px;"><input type="text" name="aaa" autocomplete="必填" class="layui-input"></div></div>');
+    //document.getElementById("addd").innerHTML = '<div class="layui-inline"> <label class="layui-form-label" style="width: 220px">名称</label><div class="layui-input-inline" style="width: 100px;"><input type="text" name="aaa" autocomplete="必填" class="layui-input"></div></div>'
+
+
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit(formDemo)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    $.ajax({
+        url: '/../../add',
+        type: 'POST',
+        data:{
+            'doc':selectdoc,
+            'sx': selectsx,
+            data:JSON.stringify(data.field)
+        },
+        success:function (data) {
+
+               ta();
+              /*
+            console.log(data);
+            $.ajax({
+                url: '/../../database',
+            })*/
+        },
+         error: function (error) {
+             alert('出错了，请稍后重试')
+                                  },
+
+    });
+    return false;
+  });
+});
+
+</script>
+</body>
+</html>

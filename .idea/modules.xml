@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Django_knowledgeGraph.iml" filepath="$PROJECT_DIR$/.idea/Django_knowledgeGraph.iml" />
+      <module fileurl="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/mathModel/.idea/mathModel.iml" filepath="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/mathModel/.idea/mathModel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../meta-search/.idea/meta-search.iml" filepath="$PROJECT_DIR$/../meta-search/.idea/meta-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../student_management/.idea/student_house.iml" filepath="$PROJECT_DIR$/../student_management/.idea/student_house.iml" />
+    </modules>
+  </component>
+</project>

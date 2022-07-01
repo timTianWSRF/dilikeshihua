@@ -1,0 +1,91 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>注册</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>-->
+<!--        <p style="text-align:center">新用户注册</p>-->
+<!--    </h1>-->
+<!--    <center>-->
+<!--    <form action="" method="post">-->
+<!--        {% csrf_token %}-->
+<!--        <p style="text-align:center">用户：<input type="text" name="username" /></p>-->
+<!--&lt;!&ndash;        <p style="text-align:center">邮箱：<input type="text" name="email"/> </p>&ndash;&gt;-->
+<!--        <p style="text-align:center">密码：<input type="password" name="password"/></p>-->
+<!--        <p style="text-align:center"> <input type="submit" value="注册" />-->
+
+<!--          <p style="color: #ff0000;text-align: center">{{error_name}}</p>-->
+
+<!--</form>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<link href="/static/css/login.css" rel="stylesheet"/>
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <style>
+        body {
+        background-image: url('/media/bg9.png');
+            background-repeat: no-repeat center center;
+            background-size:cover;  /* 让背景图基于容器大小伸缩 */
+            background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
+            background-color:#CCCCCC;
+
+        {#    background-position: center top;#}
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<div class="Card SignContainer-content">
+    <div class="SignFlowHeader" style="padding-bottom:5px">
+        <div class="SignFlowHeader-slogen"><!-- -->用户注册</div>
+    </div>
+    <div class="SignContainer-inner">
+        <div class="Login-content">
+            <form novalidate="" class="SignFlow" data-za-detail-view-path-module="SignInForm"
+                  data-za-extra-module="{&quot;card&quot;:{&quot;content&quot;:null}}" action="/register/" method="post">
+                {% csrf_token %}
+                <div class="SignFlow-account">
+                    <div class="SignFlow-supportedCountriesSelectContainer"></div>
+                    <div class="SignFlowInput SignFlow-accountInputContainer">
+                        <div class="SignFlow-accountInput Input-wrapper"><input name="username" type="text"
+                                                                                class="Input" placeholder="用户名"
+                                                                                value=""></div>
+                        <div class="SignFlowInput-errorMask SignFlowInput-requiredErrorMask SignFlowInput-errorMask--hidden"></div>
+                    </div>
+                </div>
+                <div class="SignFlow-password">
+                    <div class="SignFlowInput">
+                        <div class="Input-wrapper"><input name="password" type="password" class="Input" placeholder="密码"
+                                                          value=""></div>
+                        <div class="SignFlowInput-errorMask SignFlowInput-requiredErrorMask SignFlowInput-errorMask--hidden"></div>
+                    </div>
+
+                </div>
+                <div class="Login-options">
+                    <button type="button" class="Button Login-switchType Button--plain"></button>
+<!--                    <button type="button" class="Button Login-cannotLogin Button&#45;&#45;plain">忘记密码？</button>-->
+                </div>
+                <button type="submit" class="Button SignFlow-submitButton Button--primary Button--green">注册</button>
+            </form>
+        </div>
+        <div class="SignContainer-switch">已有帐号？
+            <span ><a  href="/login/">返回登录界面</a>
+        </div>
+        <div class="SignFlowHomepage-qrImage SignFlowHomepage-qrImageHidden">
+            <div></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

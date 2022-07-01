@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+   <!-- 引入 layui.css-->
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+
+    <!-- 引入 layui.js-->
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+<select name="myid" id="myid"  href="javascript:" placeholder="">
+    <span>选择分类</span>
+   </select>
+       <script type="text/javascript">
+           window.onload = SearchVehicleTag();//加载页面时自动执行方法
+     function SearchVehicleTag(){
+    	 $.ajax({
+             url: "/../../getdocumentname",
+             type: "post",
+             data:{
+                 entity:"document"
+             },
+
+        //     traditional: true,
+             success: function (data) {
+                var data1 = JSON.parse(data);
+              //  console.log(data1);
+                 for (var i = 0; i < data1.length; i++) {
+                     var jsonObj =data1[i];
+$("#myid").append("<option value='" + jsonObj['ID'] + "'>" + jsonObj['TAGNAME'] + "</option>");
+
+                 }
+             },
+             error: function (error) {
+                 alert("数据加载出错，请重试！");
+             }
+         });
+     }
+
+       </script>
+<div style="margin-bottom: 5px;">
+
+<!-- 示例-970 -->
+<ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px" data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
+
+</div>
+
+<div class="layui-btn-group demoTable">
+  <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+  <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+  <button class="layui-btn" data-type="isAll">验证是否全选</button>
+</div>
+
+
+<table id="col_tab" class="layui-table" lay-data="{width: 892, height:330, url: '../media/getdata/t' , page:true, id:'idTest'}" lay-filter="demo">
+    <thead id="col_thead">
+        <tr id="col_tr">
+            <th id="col_th">aa</th>
+            <th id="col_th1"></th>
+        </tr>
+    </thead>
+
+    <tbody id="col_body"></tbody>
+</table>
+</body>
+<script>
+    layui.use('table', function(){
+      $.ajax({
+          url:'/../../tablecol',
+          type:'POST',
+
+          datatype:'JSON',
+          data:{
+              'entity':"classD"
+          },
+          success:function (data) {
+          var data1 = JSON.parse(data);
+
+          for(var i = 0; i< data1.length; i++){
+              var d = data1[i];
+              d = d['par'];
+            // var c = JSON.stringify(d);
+           //  console.log(typeof d);
+         //    c = JSON.parse(c);
+
+         //     d = JSON.stringify(d);
+              //var f = $("<th lay-data='" + d + "'>" + data1[i]['name'] + "</th>");
+              //var a0 =  $("#col_tr")
+              //a0.append(f)
+              //console.log(f);
+              //a0.append(a1);
+
+
+          }
+          var th1 = $('th[data-key="1-0-1"]');
+        //  console.log(th1);
+        //  var th =  $('th[data-key="1-0-0"]').text();
+        //  console.log(th)
+          //th.append('aaaaaa')
+         // th.html("<th>aaaaaaaaa</th>")
+          var f = $("<th lay-data='" + d + "'>" + data1[0]['name'] + "</th>");
+         // var a0 =  $("#col_tr");
+              th1.append(f)
+          //a0.append(f);
+
+          }
+    })
+    });
+</script>
+
+<script type="text/html" id="barDemo">
+  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
+</script>
+
+
+
+<!-- 注意：如果你直接复制所有代码到本地，上述 JS 路径需要改成你本地的 -->
+<script>
+layui.use('table', function(){
+  var table = layui.table;
+  //监听表格复选框选择
+  table.on('checkbox(demo)', function(obj){
+    console.log(obj)
+  });
+  //监听工具条
+  table.on('tool(demo)', function(obj){
+    var data = obj.data;
+    if(obj.event === 'detail'){
+      layer.msg('ID：'+ data.id + ' 的查看操作');
+    } else if(obj.event === 'del'){
+      layer.confirm('真的删除行么', function(index){
+        obj.del();
+        layer.close(index);
+      });
+    } else if(obj.event === 'edit'){
+      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+    }
+  });
+
+  var $ = layui.$, active = {
+    getCheckData: function(){ //获取选中数据
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.alert(JSON.stringify(data));
+    }
+    ,getCheckLength: function(){ //获取选中数目
+      var checkStatus = table.checkStatus('idTest')
+      ,data = checkStatus.data;
+      layer.msg('选中了：'+ data.length + ' 个');
+    }
+    ,isAll: function(){ //验证是否全选
+      var checkStatus = table.checkStatus('idTest');
+      layer.msg(checkStatus.isAll ? '全选': '未全选')
+    }
+  };
+
+  $('.demoTable .layui-btn').on('click', function(){
+    var type = $(this).data('type');
+    active[type] ? active[type].call(this) : '';
+  });
+});
+</script>
+
+
+</html>

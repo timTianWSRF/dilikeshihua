@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+     <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+</head>
+<body>
+
+
+<ul class="layui-nav" lay-filter="">
+  <li class="layui-nav-item"><a href="">HOME</a></li>
+
+
+  <li class="layui-nav-item">
+    <a href="javascript:;">功能选择</a>
+    <dl class="layui-nav-child"> <!-- 二级菜单 -->
+      <dd><a href="add_stu.html">辅助决策</a></dd>
+
+
+    </dl>
+  </li>
+  <li class="layui-nav-item" id="e1" onclick="ccc() "><a href="">社区</a></li>
+</ul>
+<div id="id"  style="display: none" >
+    一时一地哦分影视丢返回撒地方
+
+</div>
+
+<script>
+//注意：导航 依赖 element 模块，否则无法进行功能性操作
+
+layui.use('element', function(){
+  var element = layui.element;
+
+  //…
+});
+function ccc() {
+
+    document.getElementById("id").style.display="";
+}
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,122 @@
+    <!DOCTYPE html>
+    <html lang="zh">
+    <head>
+      <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>数据</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="">
+    <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+   <!-- 引入 layui.css-->
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+
+    <!-- 引入 layui.js-->
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+   <!-- <div>
+         <button type="button" class="layui-btn layui-btn-radius" >classD</button>
+    </div>  -->
+    <!--  下拉框  选择文件进行表格显示 -->
+
+   <select name="myid" id="myid"  href="javascript:" placeholder="">
+    <span>选择分类</span>
+   </select>
+
+
+<!--下拉框  选择文件对应的图层信息进行显示-->
+<select name="mytype" id="mytype"  href="javascript:" placeholder="">
+    <span>选择分类</span>
+    <option value="1">ASX</option>
+    <option value="2">BSX</option>
+    <option value="3">CSX</option>
+    <option value="4" selected>DSX</option>
+    <option value="5">ESX</option>
+    <option value="6">FSX</option>
+    <option value="7">GSX</option>
+    <option value="8">HSX</option>
+    <option value="9">ISX</option>
+    <option value="10">JSX</option>
+    <option value="11">KSX</option>
+    <option value="12">LSX</option>
+    <option value="13">MSX</option>
+    <option value="14">NSX</option>
+    <option value="15">OSX</option>
+    <option value="16">PSX</option>
+    <option value="17">QSX</option>
+    <option value="18">RSX</option>
+</select>
+
+   <!--追加按钮 用于获取当前选择的文件及数据类别-->
+   <button type="button" onclick="tableupdate()">确定</button>
+
+    <table id="demotable" lay-filter="test"></table>
+
+ </body>
+
+
+
+  <!--
+    <script type="text/javascript" src="../static/tableupdate.js"> </script>
+     -->
+<script type="text/javascript" src="../static/tableupdate.js" >
+  //  window.onload = onload
+</script>
+
+  <script>
+   $.ajax({
+             url: "/../../getdocumentname",
+             type: "post",
+             async:false,
+             data:{
+                 entity:"document"
+             },
+        //     traditional: true,
+             success: function (data) {
+                var data1 = JSON.parse(data);
+                $("#myid").append("<option value='" + data1[0]['ID'] + " 'selected'>" + data1[0]['TAGNAME'] + "</option>");
+               // console.log("输出data1[0]['TAGNAME']数据：",data1[0]['TAGNAME']);
+                 var html = '';
+                 for (var i = 1; i < data1.length; i++) {
+                     var jsonObj =data1[i];
+                      //$("#myid").append("<option value='" + jsonObj['ID'] + "'>" + jsonObj['TAGNAME'] + "</option>");
+                      html += "<option value='" + jsonObj['ID'] + "'>" + jsonObj['TAGNAME'] + "</option>"
+                     }
+                 $("#myid").append(html);
+                 },
+             error: function (error) {
+                 alert("数据加载出错，请重试！");
+             }
+         });
+
+
+    </script>
+
+   <script type="text/html" id="toolbarDemo">
+  <div class="layui-btn-container">
+    <button class="layui-btn layui-btn-sm" lay-event="add">添加</button>
+  <!--  <button class="layui-btn layui-btn-sm" lay-event="delete">删除</button>
+    <button class="layui-btn layui-btn-sm" lay-event="update">编辑</button>  -->
+  </div>
+</script>
+
+    <script type="text/html" id="barDemo">
+        <!--
+        <a class="layui-btn layui-btn-xs" lay-event="detail">查看</a>
+        -->
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>
+ 
+<script>
+    tableupdate();
+</script>
+   
+    </html>

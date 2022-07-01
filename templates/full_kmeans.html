@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>辅助决策-聚类分析</title>
+    <style>
+        body {
+        background-image: url('/media/bg9.png');
+            background-repeat: no-repeat center center;
+            background-size:cover;  /* 让背景图基于容器大小伸缩 */
+            background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
+            background-color:#CCCCCC;
+
+        {#    background-position: center top;#}
+        }
+    </style>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <style type="text/css">
+
+#but{
+    position: absolute;
+    top: 750px;
+    right: 500px;
+    z-index: 99;
+    font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
+}
+
+#legends{
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #fff;
+    text-align: center;
+    height: 60px;
+    width: 140px;
+}
+
+#checkboxs{
+    position: absolute;
+    top: 120px;
+    left: -50px;
+    height: 1000px;
+    background-color: #fff;
+    font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
+}
+
+#tim {
+ font-family: Microsoft YaHei,'隶书' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+
+#abc {
+<!--	background-color: #272b30;-->
+	padding: 30px 40px;
+	text-align: center;
+    font-family: OpenSans-Light, PingFang SC, Hiragino Sans GB, Microsoft Yahei, Microsoft Jhenghei, sans-serif;
+    background-size:cover;
+}
+
+#indicator {
+	position: absolute;
+	right: 60px;
+	bottom: 150px;
+    text-align: left;
+    color: #f2f2f2;
+    font-size: 20px;
+}
+
+#indicator>div {
+    margin-bottom: 4px;
+}
+
+
+#indicator span {
+    display: inline-block;
+    width: 30px;
+    height: 14px;
+    position: relative;
+    top: 2px;
+    margin-right: 8px;
+}
+
+.links line {
+	stroke: rgb(240, 240, 240);
+	stroke-opactity: 0.2;
+
+}
+
+.links line.inactive {
+    /*display: none !important;*/
+    stroke-opacity: 0;
+
+}
+
+.nodes circle {
+	stroke: #fff;
+	stroke-width: 1.5px;
+}
+
+.nodes circle:hover {
+    cursor: pointer;
+}
+
+.nodes circle.inactive {
+	display: none !important;
+}
+
+.texts text {
+    display: none;
+}
+
+.texts text:hover {
+    cursor: pointer;
+}
+
+.texts text.inactive {
+    display: none !important;
+}
+
+
+
+#mode {
+    position: absolute;
+    top: 160px;
+    right: 60px;
+}
+
+#mode span {
+    display: inline-block;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: color, background-color .3s;
+    -o-transition: color, background-color .3s;
+    -ms-transition: color, background-color .3s;
+    -moz-transition: color, background-color .3s;
+    -webkit-transition: color, background-color .3s;
+}
+
+#mode span.active, #mode span:hover {
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+
+#info {
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    text-align: right;
+    width: 270px;
+}
+
+
+#info p {
+    color: #fff;
+    font-size: 12px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+#info p span {
+    color: #888;
+    margin-right: 10px;
+}
+
+#info h4 {
+    color: #fff;
+    font-size: 20px;
+}
+
+
+#search input {
+    position: absolute;
+    top: 220px;
+    right: 60px;
+    color: #fff;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    width: 200px;
+    background-color: #666;
+}
+
+#cisloading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 1000;
+    display: none;
+}
+
+#svg2 g.row:hover {
+    stroke-width: 1px;
+    stroke: #fff;
+}
+
+</style>
+    <script>
+    //左侧下拉框
+    //动态参数参考database.html中的表头处的下拉框
+
+
+    window.onload = setselectele();
+   var selectdata;
+   function setselectele(){
+    $.ajax({
+               url:'/../../setele',
+               type:"POST",
+               async:false,
+               success:function(data){
+                   selectdata = JSON.parse(data);
+                   console.log(selectdata);
+
+               }
+
+
+     })
+     }
+layui.use(['tree', 'util'], function(){
+  var tree = layui.tree
+  ,layer = layui.layer
+  ,util = layui.util
+      ,data2 = selectdata;
+  //模拟数据2   是否可以获取后端数据进行绘制
+//,data2 = [{title: 'DN05490062',id: 1,children: [{title: 'D',id: 4}]}];
+  //,data2 = [{title: '数据',id: 1,children: [{title: 'country',id: 5},{title: 'province',id: 6},{title: 'city',id: 7}]}];
+
+
+//var checkedList=[];
+  //开启复选框
+  tree.render({
+      id:'demoo'
+,   elem: '#test5'
+    ,data: data2
+      ,isJump: true
+    ,showCheckbox: true
+    ,oncheck:function (event) {
+              event.data.checked = !event.data.checked;
+
+
+
+              let checkData = tree.getChecked('demoo');
+              let classes = [];
+              if(checkData.length==1){
+              for(var item in checkData[0]["children"]){
+          //        console.log(checkData[0]["children"][item]["title"]);
+                  classes.push(checkData[0]["children"][item]["title"]);
+                  console.log(classes);
+              }}
+             $.ajax({
+                                  //仅添加删市
+                                  //url: 'KG/views/deleteNumber',
+                                  url: '/../../classfiy',
+                                  type : 'GET',
+                                  data :{
+                                      'classes': classes.toString()
+                                  },
+
+                                  success: function (data) {
+                                     // alert(data);
+                                    //  d3.selectAll("svg").remove();
+                                      draw111("../media/json/dataupdate.json");
+                                  },
+                                  error: function (error) {
+                                      alert('出错了，请稍后重试')
+                                  },
+
+                          });
+      }
+  });
+});
+
+   function decision_making(){
+       layer.open({
+           type:2
+           ,title:false
+           ,closeBtn:true
+           ,area:['50%','50%']
+           ,shade:0.8
+           ,id:'decision_making'
+           ,moveType:1
+           ,content:"decision_making.html"//.html
+       })
+   }
+
+   function notice_open(){
+
+		//示范一个公告层
+		layer.open({
+		  type: 2
+		  ,title: false //不显示标题栏
+		  ,closeBtn: false
+		  ,area: ['100%', '100%']
+		  ,shade: 0.8
+		  ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+		  ,btn: ['X']
+		  ,btnAlign: 'c'
+		  ,moveType: 1 //拖拽模式，0或者1
+		  ,content: "aim.txt"
+		  ,success: function(layero){
+			// var btn = layero.find('.layui-layer-btn');
+			// btn.find('.layui-layer-btn0').attr({
+			//   href: 'http://www.layui.com/'
+			//   ,target: '_blank'
+			// });
+		  }
+		});
+
+	}
+</script>
+<script src="https://d3js.org/d3.v4.min.js">
+
+</script>
+
+<!-- 补充JS代码 -->
+<script type="text/javascript">
+    layui.use('element', function(){
+  var element = layui.element;
+
+  //…
+});
+
+    var flag = false;
+
+    function add_node() {
+                flag = true;
+
+            }
+    var a = new Array();
+    var c = new Array();
+    var b = new Array();
+    var NearResult;
+    function end_node() {
+        $.ajax({
+            url:'/../../path',
+            type:'POST',
+
+            data:{
+                name:a.toString(),
+                leixing:c.toString(),
+                class:b[0],
+            },
+            beforeSend:function(){
+                $('#cisloading').show();
+            },
+            success:function (data) {
+                NearResult = data;
+
+                layer.open({
+                   type: 2
+                    ,title:"结果"
+                    ,closeBtn: false
+                    ,area: ['65%', '70%']
+                    ,shade:0.8
+                    ,id: 'PathResult'
+                    ,btn:['关闭']
+                    ,btnAlign: 'c'
+                    ,anim:1
+                    ,maxmin:true
+                    ,moveType: 1
+                   // ,content:"PathResult.html"
+                    ,content:"{% url 'temp' %}"
+
+
+});
+            },
+            error:function(error){
+                $('#cisloading').hide();
+                alert("出错了，请稍后再试")
+            },
+            complete:function () {
+                $('#cisloading').hide();
+            }
+         });
+
+
+
+
+     //后端寻找路径规划方案并返回
+        /*layer.open({
+  title: '在线调试'
+  ,content: JSON.stringify(a)
+});*/
+        a = [];
+        c = [];
+        b = [];
+        flag = false;
+    }
+
+    //第一次获取表格数据填充
+    function opend(){
+        /*   $.ajax({
+               url: '/../../data',
+                                  type : 'POST',
+                                  data :{
+                                      'entity': "classD"
+                                  },
+                                  success: function (data) {
+                                       // alert(data)
+                                  },
+                                  error: function (error) {
+                                      alert('出错了，请稍后重试')
+                                  },
+           });*/
+
+
+        //弹表格界面
+
+          layer.open({
+          type: 2
+          ,title:"data" //不显示标题栏
+          ,closeBtn: false
+          ,area: ['90%','95%']
+          ,shade: 0.8
+          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+          ,btn: ['关闭']
+          ,btnAlign: 'c'
+                    ,anim:1
+          ,moveType: 1 //拖拽模式，0或者1
+          //,content: "tablea.html"
+                   ,content: "{% url 'database' %}"
+          });
+      
+    }
+</script>
+
+    <script type="text/javascript" src="../static/dataupdate.js"></script>
+</head>
+
+
+<body>
+<!--导航条-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'select' %}" id='tim'>首页</a>
+    <li><a href="#">|</a></li>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+        <a class="nav-link" href="{% url 'summarize' %}">数据一览</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'add_stu' %}">路径规划<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'find_road' %}" >目标定位</a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">数据管理</a>
+      </li>
+                <li class="nav-item">
+        <a class="nav-link" href="#" onclick="opend()">查看数据</a>
+      </li>
+              <li class="nav-item active">
+        <a class="nav-link" href="{% url 'k_means' %}">聚类分析</a>
+      </li>
+                      <li class="nav-item">
+        <a class="nav-link" href="{% url 'heat_map' %}">热力图分析</a>
+      </li>
+        <li class="nav-item ">
+        <a class="nav-link" href="{% url 'fuzhujuece' %}">战争预测</a>
+      </li>
+<!--      <li class='nav-item dropdown'>-->
+<!--        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">-->
+<!--          功能选择-->
+<!--        </a>-->
+<!--        <div class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--        <dd><a href="#" onclick="decision_making()"></a></dd>-->
+<!--          <a class="dropdown-item" href="add_stu.html">路径规划</a>-->
+<!--          <a class="dropdown-item" onclick="notice_open()">目标定位</a>-->
+<!--          <div class="dropdown-divider"></div>-->
+<!--          <a class="dropdown-item" href="#">数据管理</a>-->
+<!--            <a class="dropdown-item" onclick="opend()">查看数据</a>-->
+<!--        </div>-->
+<!--      </li>-->
+      <li class="nav-item">
+        <a class="nav-link disabled">社区</a>
+      </li>
+    </ul>
+    <ul class="nav nav-pills">
+
+            {% if not request.session.username %}
+        <li role="presentation"><a ><b>欢迎！</b> <span>游客 </span></a></li>
+                <li><a href="#">|</a></li>
+        <li><b>请</b><span><a href="\login\">登录</a></span></li>
+                {%  else %}
+                      <li role="presentation"><a ><b>欢迎！</b> <span>{{ request.session.username }} </span></a></li>
+        <li><a href="#">|</a></li>
+        <li role="presentation"><a href="\logout2\">退出</a></li>
+            {% endif %}
+
+
+    </ul>
+  </div>
+</nav>
+
+
+<form action="{% url 'k_means' %}" method="post">
+      <div class="card">
+<!--  <h1 class="display-6 text-center">聚类分析</h1>-->
+<!--下拉菜单-种类选择-->
+          <div class="input-group mb-3">
+  <select class="custom-select" id="inputGroupSelect02" name="choice">
+    <option selected value="1">坐标种类选择-水域</option>
+    <option value="2">测量控制点</option>
+    <option value="3">工农业基础设施</option>
+      <option value="4">植被</option>
+<!--      <option value="5">机场</option>-->
+  </select><div class="input-group-prepend">
+    <span class="input-group-text" id="basic-addon1" >K值(K>1)</span><input type="text" class="form-control" value=3 placeholder="3" aria-describedby="basic-addon1" name="k">
+  </div>
+  <div class="input-group-append">
+    <input class="input-group-text" type="submit">
+  </div>
+          </div></div></form>
+<!--        <div class="input-group mb-3">-->
+<!--      <div class="input-group-prepend">-->
+<!--    <label class="input-group-text">坐标种类选择</label>-->
+<!--  </div><select class="custom-select" id="inputGroupSelect01" name="lake">-->
+<!--    <option selected value="0">水域</option>-->
+<!--    <option value="1">测量控制点</option>-->
+<!--    <option value="2">工农业基础设施</option>-->
+<!--  <option value="2">植被</option>-->
+<!--  <option value="2">机场</option>-->
+<!--&lt;!&ndash;K的大小&ndash;&gt;-->
+<!--            <div class="form-group"><div class="input-group mb-3">-->
+<!--  <div class="input-group-prepend">-->
+<!--    <span class="input-group-text" id="basic-addon1">K值</span>-->
+<!--  </div>-->
+<!--  <input type="text" class="form-control" value=3 placeholder="3" aria-describedby="basic-addon1" name="maskLen">-->
+<!--            </div></div></select></div></div>  <div class="input-group-append">-->
+<!--    <button class="btn btn-outline-secondary" type="button">Button</button>-->
+<!--  </div>-->
+      <iframe name="content_frame" marginwidth=0 marginheight=0 width=100% height=1000 src="{% url 'KMEANS' %}" frameborder=0></iframe>
+
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+
+<!-- 目标检测弹窗页面 -->
+
+<head>
+  <!-- 引入 layui.css-->
+  <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+
+  <!-- 引入 layui.js-->
+  <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+  <script src="http://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+  <div class="layui-row">
+    <div class="layui-col-md6">
+
+
+
+       </select>
+
+
+      <button class="layui-btn" id="demo1" style="margin-left: 5%;margin-top: 5%;margin-bottom: 1%;">
+        地区选择
+        <i class="layui-icon layui-icon-down layui-font-12"></i>
+      </button>
+      <form class="layui-form" action=""  style="overflow-y: scroll;height: 80%;">
+
+
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>道路密度</legend>
+          </fieldset>
+          <!-- <label class="layui-form-label">道路密度</label> -->
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="radio" name="road-density" value="-1" title="默认" checked="">
+            <input type="radio" name="road-density" value="0" title="低">
+            <input type="radio" name="road-density" value="1" title="中">
+            <input type="radio" name="road-density" value="2" title="高">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>陆地地貌及土质</legend>
+          </fieldset>
+          <label class="layui-form-label">等高线</label>       <!--此处的form，加入表单中-->
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="h_min" placeholder="米m" autocomplete="off" class="layui-input" lay-verify="number" value="-20000">
+          </div>
+          <div class="layui-form-mid">-</div>
+          <div class="layui-input-inline" style="width: 100px;">
+            <input type="text" name="h_max" placeholder="米m" autocomplete="off" class="layui-input" lay-verify="number" value="50000">
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+          <label class="layui-form-label">地&nbsp&nbsp&nbsp&nbsp貌</label>
+          <div class="layui-input-block" style="height: 12px;">
+            <input type="checkbox" name="landform[0]" value="0" lay-skin="primary" title="雪山地貌" checked="">
+            <input type="checkbox" name="landform[1]" value="1" lay-skin="primary" title="黄土地貌">
+            <input type="checkbox" name="landform[2]" value="2" lay-skin="primary" title="岩溶地貌"><br>
+            <input type="checkbox" name="landform[3]" value="3" lay-skin="primary" title="风成地貌">
+            <input type="checkbox" name="landform[4]" value="4" lay-skin="primary" title="火山地貌">
+            <input type="checkbox" name="landform[5]" value="5" lay-skin="primary" title="其他地貌">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>水域</legend>
+          </fieldset>
+          <!-- <label class="layui-form-label">道路密度</label> -->
+          <div class="layui-input-block">
+            <input type="radio" name="lake" value="-1" title="默认" checked="">
+            <input type="radio" name="lake" value="1" title="是">
+            <input type="radio" name="lake" value="0" title="否">
+          </div>
+        </div>
+
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>测量控制点</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="radio" name="surveyControlPoint" value="-1" title="默认" checked="">
+            <input type="radio" name="surveyControlPoint" value="1" title="是">
+            <input type="radio" name="surveyControlPoint" value="0" title="否">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>工农业社会文化设施</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="radio" name="industrial_and_agricultural_social_and_cultural_facilities" value="-1" title="默认" checked="">
+            <input type="radio" name="industrial_and_agricultural_social_and_cultural_facilities" value="1" title="是">
+            <input type="radio" name="industrial_and_agricultural_social_and_cultural_facilities" value="0" title="否">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>居民地及附属设施</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="checkbox" name="residential_land_and_ancillary_facilities[0]" lay-skin="primary"  value="0" title="居民地" checked="">
+            <input type="checkbox" name="residential_land_and_ancillary_facilities[1]" lay-skin="primary"  value="1" title="独立建筑物" checked="">
+            <input type="checkbox" name="residential_land_and_ancillary_facilities[2]" lay-skin="primary"  value="2" title="其他建筑物" checked="">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>管线</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="checkbox" name="pipeline[0]" lay-skin="primary" value="0" title="电力线" checked="">
+            <input type="checkbox" name="pipeline[1]" lay-skin="primary" value="1" title="通信线" checked="">
+            <input type="checkbox" name="pipeline[2]" lay-skin="primary" value="2" title="管道" checked="">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>植被</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="radio" name="plant" value="-1" title="默认" checked="">
+            <input type="radio" name="plant" value="1" title="是">
+            <input type="radio" name="plant" value="0" title="否">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>机场</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="radio" name="airport" value="-1" title="默认" checked="">
+            <input type="radio" name="airport" value="1" title="是">
+            <input type="radio" name="airport" value="0" title="否">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>军事区域</legend>
+          </fieldset>
+          <div class="layui-input-block" style="height: 30px;">
+            <input type="radio" name="military_area" value="-1" title="默认" checked="">
+            <input type="radio" name="military_area" value="1" title="是">
+            <input type="radio" name="military_area" value="0" title="否">
+          </div>
+        </div>
+
+        <div class="layui-form-item">
+          <button type="submit" class="layui-btn layui-btn-normal layui-btn-radius" style="margin-left: 10%;" lay-submit=""  data-anim="layui-anim-rotate layui-anim-loop">提          交</button>
+        </div>
+
+      </form>
+    </div>
+    <div class="layui-col-md6">
+      <div class="layui-card" style="margin-top: 5%;margin-left: 5%;margin-right: 5%; height: 90%;">
+        <div id='zbTitle' class="layui-card-header">检索结果显示</div>
+        <div id='zbShow' class="layui-card-body" style="overflow-y: scroll;height: 87%;">
+          检索结果坐标
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+<script>
+
+// 刷新地图
+function refresjFrame() {
+    document.getElementById('drawmap').contentWindow.location.reload(true)
+}
+
+// 睡眠函数
+function sleep(numberMillis) {
+	var now = new Date();
+	var exitTime = now.getTime() + numberMillis;
+	while (true) {
+		now = new Date();
+		if (now.getTime() > exitTime)
+		return;
+	    }
+}
+
+layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit()', function(data1){
+    // Object.assign()
+    ddata = {'dbName':dbName};
+    Object.assign(ddata, data1.field);
+    alert('ddata='+JSON.stringify(ddata));
+      $.ajax({
+            url: '/../../aim1',
+            type : 'GET',
+            data:ddata,
+            // 在收到服务器返回前
+            beforeSend:function(){
+              zbShow.innerHTML='Loading............';
+            },
+            // 服务器返回结果后
+            complete:function(){
+                var zbTitle=document.getElementById("zbTitle");
+                zbTitle.innerHTML="查询结果";
+            },
+            // 服务器返回成功后执行
+            success: function (data) {
+                console.log(data);
+                var zbShow=document.getElementById("zbShow");
+                zbShow.innerHTML=data;
+                if(data.length==0) zbShow.innerHTML="VIP解锁查看详细内容！！！<br> --by ll";
+              //  d3.selectAll("svg").remove();
+
+
+
+                //左侧弹出地图界面
+                  layer.open({
+                  type: 2
+                  ,title: "定位地图" //不显示标题栏
+                  ,closeBtn: false
+                  ,area: ['50%', '100%']
+                  ,shade: 0
+                  ,offset:['0px', '0px']
+                      ,maxmin: true
+                  ,id: 'draw_map' //设定一个id，防止重复弹出
+                  ,btn: ['关闭']
+                  ,btnAlign: 'c'
+                  ,moveType: 1 //拖拽模式，0或者1,
+                  ,content:"draw_geo.html"
+		});
+
+
+
+
+            },
+            // 服务器返回失败后执行
+            error: function (error) {
+                alert('出错了，请稍后重试')
+            },
+
+    });
+    return false;
+  });
+
+//复选框监听事件（只能单选）
+form.on('checkbox',function(data){
+	var oldState = data.elem.checked; // 记录状态
+    var elName = data.elem.name || ''; // 取当前名称
+    $("input[name='"+elName+"']").prop("checked", false);	//全部取消选中(name要一致)
+    $(this).prop("checked", true);	//勾选当前选中的选择框
+    if(!oldState){ // 如果是flase表示点击的是之前已被选中的那个
+      $(this).prop("checked", false); // 取消勾选当前的
+    }
+    form.render('checkbox');	//重新渲染
+});
+
+});
+dbName = '';
+//哼😕这个才不是下拉框的说
+layui.use('dropdown', function(){
+  var dropdown = layui.dropdown;
+  dropdown.render({
+    elem: '#demo1' //可绑定在任意元素中，此处以上述按钮为例
+    ,data: oobj
+    // [{
+    //   title: 'menu item 1'
+    //   ,id: 100
+    //   ,href: '#'
+    // },{
+    //   title: 'menu item 2'
+    //   ,id: 101
+    //   ,href: 'https://www.layui.com/' //开启超链接
+    //   ,target: '_blank' //新窗口方式打开
+    // }]
+    ,id: 'demo1'
+    //菜单被点击的事件
+    ,click: function(obj){
+      // alert(obj.title)
+      document.getElementById("demo1").innerHTML=obj.title+'          <i class="layui-icon layui-icon-down layui-font-12"></i>';
+      dbName = obj.title[0]
+
+      // console.log(obj);
+      // layer.msg('回调返回的参数已显示再控制台');
+    }
+  });
+});
+
+//这个不是滑动条
+  layui.use('slider', function(){
+    var $ = layui.$
+    ,slider = layui.slider;
+    //默认滑块
+    slider.render({
+      elem: '#slideTest1'
+    });
+
+    //定义初始值
+    slider.render({
+      elem: '#slideTest2'
+      ,value: 20 //初始值
+    });
+
+    //设置最大最小值
+    slider.render({
+      elem: '#slideTest3'
+      ,min: 20 //最小值
+      ,max: 50 //最大值
+    });
+
+    //设置步长
+    slider.render({
+      elem: '#slideTest4'
+      ,step: 10 //步长
+    });
+
+    slider.render({
+      elem: '#slideTest5'
+      ,step: 10 //步长
+      ,showstep: true //开启间隔点
+    });
+
+    //设置提示文本
+    slider.render({
+      elem: '#slideTest6'
+      ,min: 20
+      ,max: 1000
+      ,setTips: function(value){ //自定义提示文本
+       return value + 'GB';
+      }
+    });
+    slider.render({
+      elem: '#slideTest7'
+      ,tips: false //关闭默认提示层
+      ,change: function(value){
+        $('#test-slider-tips1').html('当前数值：'+ value);
+      }
+    });
+
+    //开启输入框
+    slider.render({
+      elem: '#slideTest8'
+      ,input: true //输入框
+    });
+
+    //开启范围选择
+    slider.render({
+      elem: '#slideTest9'
+      ,value: 40 //初始值
+      ,range: true //范围选择
+      ,change: function(vals){
+        $('#test-slider-tips2').html('开始值：'+ vals[0] + '、结尾值：'+ vals[1]);
+      }
+    });
+    slider.render({
+      elem: '#slideTest10'
+      ,value: [30, 60] //初始值
+      ,range: true //范围选择
+    });
+
+    //垂直滑块
+    slider.render({
+      elem: '#slideTest11'
+      ,type: 'vertical' //垂直滑块
+    });
+    slider.render({
+      elem: '#slideTest12'
+      ,value: 30
+      ,type: 'vertical' //垂直滑块
+    });
+    slider.render({
+      elem: '#slideTest13'
+      ,value: 50
+      ,range: true //范围选择
+      ,type: 'vertical' //垂直滑块
+    });
+    slider.render({
+      elem: '#slideTest14'
+      ,value: 80
+      ,input: true //输入框
+      ,type: 'vertical' //垂直滑块
+    });
+
+    //自定义颜色
+    slider.render({
+      elem: '#slideTest15'
+      ,theme: '#1E9FFF' //主题色
+    });
+    slider.render({
+      elem: '#slideTest16'
+      ,value: 50
+      ,theme: '#5FB878' //主题色
+    });
+    slider.render({
+      elem: '#slideTest17'
+      ,value: [30, 70]
+      ,range: true
+      ,theme: '#FF5722' //主题色
+    });
+
+    //禁用滑块
+    slider.render({
+      elem: '#slideTest18'
+      ,value: 35
+      ,disabled: true //禁用滑块
+    });
+
+  });
+  </script>
