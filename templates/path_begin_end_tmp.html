@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+
+    <!-- 引入 layui.js-->
+    <script src="//unpkg.com/layui@2.6.8/dist/layui.js"></script>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<body>
+<form class="layui-form" action="" style="width: 500px;font-size:30px;">
+  <div class="layui-form-item" id="addd" style="position: relative;
+          left: 800px;top: 100px;">
+<label class="layui-form-label" style="width: 400px;font-size:30px;color: #272727;top:10px;left:-150px">输入地名进行路径规划：</label>
+      <br><br>
+  <div class="layui-inline" style="left: 50px;top:50px">
+    <label class="layui-form-label" style="width: 500px;font-size:30px;color: #272727;top:10px;left:-250px">路径规划起始位置：</label>
+    <div class="layui-input-inline" style="width: 200px;top:25px">
+      <input type="text" name="路径规划起始位置" placeholder="" autocomplete="" class="layui-input"
+      style="width:500px; height:50px;position: relative;left: 15px;top: 0px;font-size: 25px">
+    </div>
+<br>
+      <br>
+  <div class="layui-inline">
+    <label class="layui-form-label" style="width: 500px;font-size:30px;color: #272727;top:100px;left:-250px">路径规划终止位置：</label>
+    <div class="layui-input-inline" style="width: 100px;top:100px">
+      <input type="text" name="路径规划终止位置" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:500px; height:50px;position: relative;left: 15px;top: 10px;font-size: 25px">
+    </div>
+      <button class="layui-btn" lay-submit lay-filter="formDemo1"
+      style="position: relative;left: 500px;top: 250px;font-size: 35px">提交位置</button>
+  </div>
+</div> </div>
+      <div class="layui-form-item" id="addd"
+      style="font-size:30px; position: relative;left: 700px;top: 450px;">
+<label class="layui-form-label" style="width: 400px;font-size:30px;">输入经纬度进行路径规划：</label>
+      <br><br>
+  <div class="layui-inline" style="width: 300px;font-size:30px;color: #272727;">
+    <label class="layui-form-label" style="width: 400px;font-size:30px;">路径规划起始经纬度：</label>
+    <div class="layui-input-inline" style="width: 100px;position: relative;left: 10px;top:50px">
+        度： <input type="text" name="时11" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     分： <input type="text" name="分11" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     秒： <input type="text" name="秒11" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+    </div>
+<div class="layui-inline" style="width: 300px;font-size:30px;color: #272727;position:relative;left: 500px;top:-300px">
+    <div class="layui-input-inline" style="width: 100px;position: relative;left: -50px;top:20px">
+     度： <input type="text" name="度12" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     分： <input type="text" name="分12" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     秒： <input type="text" name="秒12" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+    </div></div>
+      <br>
+      <br>
+  <div class="layui-inline" style="width: 300px;font-size:30px;color: #272727;position:relative;left: 500px;top:-310px">
+    <label class="layui-form-label" style="width: 400px;font-size:30px;position:relative;left: -200px;top:-20px">路径规划终止经纬度：</label>
+    <div class="layui-input-inline" style="width: 100px;position: relative;left: -200px;top:30px">
+     度： <input type="text" name="度21" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     分： <input type="text" name="分21" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     秒： <input type="text" name="秒21" placeholder="" autocomplete="必填" class="layui-input"
+               style="width:150px; height:50px;font-size: 25px"></div></div>
+    <div class="layui-inline" style="width: 300px;font-size:30px;color: #272727;position:relative;left: 500px;top:-300px">
+    <div class="layui-input-inline" style="width: 100px;position: relative;left: -50px;top:40px">
+     度： <input type="text" name="度22" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     分： <input type="text" name="分22" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+     秒： <input type="text" name="秒22" placeholder="" autocomplete="必填" class="layui-input"
+      style="width:150px; height:50px;font-size: 25px">
+
+</div></div>
+      <button class="layui-btn" lay-submit lay-filter="formDemo1"
+      style="position: relative;left: -50px;top: -200px;font-size: 35px">提交经纬度</button>
+  </div>
+      </div>
+
+</form>
+<script>
+
+    layui.use('form', function(){
+  var form = layui.form;
+
+  //监听提交
+  form.on('submit(formDemo1)', function(data){
+    layer.msg(JSON.stringify(data.field));
+    $.ajax({
+        url: '/../../hkj',
+        type: 'POST',
+        data:{
+            path_data:JSON.stringify(data.field)
+        },
+        success:function (data) {
+
+           console.log(data);
+              /*
+            console.log(data);
+            $.ajax({
+                url: '/../../database',
+            })*/
+        },
+         error: function (error) {
+             alert('出错了，请稍后重试')
+                                  },
+
+    });
+    return false;
+  });
+
+});
+</script>
+</body>
+</html>

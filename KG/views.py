@@ -48,9 +48,9 @@ def home(request):
 
 # add_stu界面
 def main(request):
+
     if request.method == 'GET':
-        # connection()
-        # connectDZB()
+        # json_reponse = setele2()
         con = sqlite3.connect('data.db')  # 连接桥
 
         cur = con.cursor()
@@ -60,172 +60,9 @@ def main(request):
         con.commit()
         con.close()
 
-        # 处理add_stu界面绘制图谱所需的具体数据，供d3.js使用
-        # 设置绘制home页面的图谱时获取数据的文件路径，并在文件内写入相应内容
-
-        # dir1 = os.path.join(settings.MEDIA_ROOT + os.sep + 'json' + os.sep + 'pro_citys3.json')   #!!!!!!!!!!!!!!!!!!!!begin
-        # dir2 = os.path.join(settings.MEDIA_ROOT + os.sep + 'json' + os.sep + 'linkchina3.json')
-
-        # jsondata3 = Table3Json()         !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!2022.4.28gai
-
-        # f = open(dir1, 'w+', encoding='utf-8')
-        # f.write(jsondata3)
-        # f.close()
-
-        # jsondata4 = Table4Json()
-        # f = open(dir2, 'w+', encoding='utf-8')
-        # f.write(jsondata4)
-        # f.close()                       #!!!!!!!!!!!!!!!!!!!!!!!!end
-
-        # 转到该页面
         return render(request, 'add_stu.html')
-        # return render(request, 'stu.html')
+
     return HttpResponse("数据载入完毕")
-# def main(request):
-#     if request.method == 'GET':
-#         # connection()
-#         # connectDZB()
-#         # 处理add_stu界面绘制图谱所需的具体数据，供d3.js使用
-#         # 设置绘制home页面的图谱时获取数据的文件路径，并在文件内写入相应内容
-#         dir1 = os.path.join(settings.MEDIA_ROOT + os.sep + 'json' + os.sep + 'pro_citys3.json')
-#         dir2 = os.path.join(settings.MEDIA_ROOT + os.sep + 'json' + os.sep + 'linkchina3.json')
-#
-#         jsondata3 = Table3Json()
-#         #        dir1 = os.path.join(settings.MEDIA_ROOT + os.sep + 'json' + os.sep + 'pro_citys2.json')
-#         f = open(dir1, 'w+', encoding='utf-8')
-#         f.write(jsondata3)
-#         f.close()
-#
-#         jsondata4 = Table4Json()
-#         f = open(dir2, 'w+', encoding='utf-8')
-#         f.write(jsondata4)
-#         f.close()
-#
-#         # 转到该页面
-#         return render(request, 'add_stu.html')
-#         # return render(request, 'stu.html')
-#     return HttpResponse("数据载入完毕")
-
-
-'''
-def Table3Json():
-    con = sqlite3.connect('data.db')
-    cur = con.cursor()
-    doc = 'DN05490062'
-    sql = 'select * from tuceng'
-    cur.execute(sql)
-    result = cur.fetchall()
-    jsonData = list()
-    interdata1 = dict()
-    data1 = dict()
-    # 单加doc
-    interdata1['name'] = doc
-    temp = json.dumps(interdata1, ensure_ascii=False)
-    data1[doc] = temp
-    for tuceng in result:
-        cur.execute("SELECT COUNT(*) FROM sqlite_master where type='table' and name='" + doc + "_" + tuceng[2] + "SX'")
-        flag = cur.fetchall()
-        if flag[0][0] == 1:
-            interdata1['name'] = tuceng[1]
-            temp = json.dumps(interdata1, ensure_ascii=False)
-            data1[tuceng[1]] = temp
-
-            temp2 = str(data1)
-            jsonData.append(temp2)
-
-            sql = 'select * from ' + doc + '_' + tuceng[2] + 'SX'
-            cur.execute(sql)
-            sx = cur.fetchall()
-            for row in sx:
-                interdata = dict()
-                data = dict()
-                col_name_list = [tuple[0] for tuple in cur.description]
-                for col in range(0, len(col_name_list)):
-                    interdata[col_name_list[col]] = row[col]
-                temp = json.dumps(interdata, ensure_ascii=False)
-                data[row[3]] = temp
-                temp2 = str(data)
-                jsonData.append(temp2)
-    jsondatar = json.dumps(jsonData, ensure_ascii=False)
-    jsondatar = jsondatar.replace('\\', '')
-    jsondatar = jsondatar.replace('}"', '}')
-    jsondatar = jsondatar.replace('"{', '{')
-    jsondatar = jsondatar.replace("{'", "'")
-    jsondatar = jsondatar[1:len(jsondatar) - 1]
-    jsondatar = '{' + jsondatar + '}'
-    jsondatar = jsondatar.replace("'", '"')
-    jsondatar = jsondatar.replace('"{', '{')
-    jsondatar = jsondatar.replace('}"}', '}')
-    jsondatar = jsondatar.replace('"}",', '"},')
-    return jsondatar
-
-
-def Table4Json():
-    con = sqlite3.connect('data.db')
-    cur = con.cursor()
-    sql = 'select * from tuceng'
-    cur.execute(sql)
-    tuceng = cur.fetchall()
-    doc = 'DN05490062'
-    node = list()
-    link = list()
-    data = dict()
-
-    for row in tuceng:
-        group = 1
-        cur.execute("SELECT COUNT(*) FROM sqlite_master where type='table' and name='" + doc + "_" + row[2] + "SX'")
-        flag = cur.fetchall()
-        if flag[0][0] == 1:
-            sql = 'select * from ' + doc + '_' + row[2] + 'SX'
-            cur.execute(sql)
-            col_name_list = [tuple[0] for tuple in cur.description]
-            res = cur.fetchall()
-            for i in res:
-                inter = dict()
-                links = dict()
-                inter['name'] = str(row[2] + str(i[0]) + ':' + i[3])
-                inter['belong'] = row[2]
-                inter['leixing'] = i[1]
-                inter['group'] = group
-                inter['size'] = 8
-                links['source'] = row[1]
-                links['target'] = str(row[2] + str(i[0]) + ':' + i[3])
-                links['value'] = 20
-                temp = json.dumps(inter, ensure_ascii=False)
-                temp1 = json.dumps(links, ensure_ascii=False)
-                node.append(temp)
-                link.append(temp1)
-        leixing = dict()
-        docu = dict()
-        docu['source'] = doc
-        docu['target'] = row[1]
-        docu['value'] = 20
-        leixing['name'] = row[1]
-        leixing['belong'] = row[2]
-        leixing['group'] = group
-        leixing['size'] = 10
-        leixing = json.dumps(leixing, ensure_ascii=False)
-        docu = json.dumps(docu, ensure_ascii=False)
-        node.append(leixing)
-        link.append(docu)
-        group += 1
-    document = dict()
-    document['name'] = doc
-    document['leixing'] = 'doc'
-    document['group'] = 0
-    document['size'] = 15
-    document['belong'] = 'document'
-    document = json.dumps(document,ensure_ascii=False)
-    node.append(document)
-    # Table3Json 添加doc点
-    data['nodes'] = node
-    data['links'] = link
-    datar = json.dumps(data, ensure_ascii=False)
-    datar = datar.replace('\\', '')
-    datar = datar.replace('"{', '{')
-    datar = datar.replace('}"', '}')
-    return datar
-'''
 
 
 # 处理各点的属性 转为json文件
@@ -1010,6 +847,42 @@ def upload(request):
 #     datas = json.dumps(data, ensure_ascii=False)
 #     return HttpResponse(datas)
 # 动态获取图谱界面左侧下拉框内值
+
+
+# 动态获取图谱界面左侧下拉框内值
+def setele2():
+
+    data = []
+    con = sqlite3.connect('data.db')
+    cur = con.cursor()
+    sql = "select name from document"
+    cur.execute(sql)
+    result = cur.fetchall()
+    sql1 = 'select name from tuceng'
+    cur.execute(sql1)
+    classes = cur.fetchall()
+    classes1 = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R']
+    # [{title: '数据',id: 1,children: [{title: 'country',id: 5},{title: 'province',id: 6},{title: 'city',id: 7}]}]
+    for i in range(len(result)):
+        a = dict()
+        a['title'] = result[i][0]
+        # a['id'] = i
+        # a['spread'] = True  # 使左侧下拉树形组件默认为展开状态
+
+        children = []
+        for j in range(0, 18):
+            temp = dict()
+            temp['title'] = str(classes1[j]) + str(classes[j][0])
+            temp['id'] = (i + 10) * 18 + j
+            # temp['spread'] = True
+            # temp['parent'] = result[i]  # 添加父节点名称，方便传回查找
+            # temp['spread'] = 'true'
+            children.append(temp)
+            a['children'].update(temp)
+        # data.append(a)
+    # datas = json.dumps(data, ensure_ascii=False)
+    return a
+
 def setele(request):
     if request.method != "POST":
         return JsonResponse(
@@ -1207,7 +1080,8 @@ def path(request):
         # 根据两点计算所做矩形框的四个顶点坐标
     origin = coor[0]
     destination = coor[1]
-    routes = m.findWay(origin, destination)
+    routes, routes2, routes3, routes4 = m.findWay2(origin, destination)
+
     start_x = routes[0][0][0]
     start_y = routes[0][0][1]
     end_x = routes[-1][-1][0]
@@ -1216,11 +1090,69 @@ def path(request):
     folium.Marker([start_x, start_y], tooltip="起点", popup="<b>起\t点</b>").add_to(folium_map)
     folium.Marker([end_x, end_y], tooltip="终点", popup="<b>终\t点</b>").add_to(folium_map)
     for route in routes:
-        folium_map = m.drawMapLines(route, folium_map)
+        folium_map = m.drawMapLines(route, 'blue', folium_map)
         # folium_map = m.drawMapLines(route, folium_map)
+
+    for route in routes2:
+        folium_map = m.drawMapLines(route, 'red', folium_map)
+        # folium_map = m.drawMapLines(route, folium_map)
+
+    for route in routes3:
+        folium_map = m.drawMapLines(route, 'yellow', folium_map)
+        # folium_map = m.drawMapLines(route, folium_map)
+
+    for route in routes4:
+        folium_map = m.drawMapLines(route, 'green', folium_map)
+        # folium_map = m.drawMapLines(route, folium_map)
+
     folium_map.save("templates/tmp.html")
     m.replaceJsRef("templates/tmp.html")
     return HttpResponse(routes)
+
+
+def find_road_2(request):
+    if request.method == "GET":
+        return render(request, "path_begin_end.html")
+    elif request.method == "POST":
+        typeOfWay = request.POST.get('choice')
+
+        start_du_j = request.POST.get('start_du_j')
+        start_fen_j = request.POST.get('start_fen_j')
+        start_miao_j = request.POST.get('start_miao_j')
+        start_point_j = int(start_du_j) + int(start_fen_j) / 60 + int(start_miao_j) / 3600
+
+        start_du_w = request.POST.get('start_du_w')
+        start_fen_w = request.POST.get('start_fen_w')
+        start_miao_w = request.POST.get('start_miao_w')
+        start_point_w = int(start_du_w) + int(start_fen_w) / 60 + int(start_miao_w) / 3600
+
+        end_du_j = request.POST.get('end_du_j')
+        end_fen_j = request.POST.get('end_fen_j')
+        end_miao_j = request.POST.get('end_miao_j')
+        end_point_j = int(end_du_j) + int(end_fen_j) / 60 + int(end_miao_j) / 3600
+
+        end_du_w = request.POST.get('end_du_w')
+        end_fen_w = request.POST.get('end_fen_w')
+        end_miao_w = request.POST.get('end_miao_w')
+        end_point_w = int(end_du_w) + int(end_fen_w) / 60 + int(end_miao_w) / 3600
+
+        routes = m.findWay3([start_point_j, start_point_w], [end_point_j, end_point_w], typeOfWay)
+        if routes == False:
+            return render(request, 'path_begin_end_error.html')
+        start_x = routes[0][0][0]
+        start_y = routes[0][0][1]
+        end_x = routes[-1][-1][0]
+        end_y = routes[-1][-1][1]
+        folium_map = m.drawMapCenter([start_x, start_y])
+        folium.Marker([start_x, start_y], tooltip="起点", popup="<b>起\t点</b>").add_to(folium_map)
+        folium.Marker([end_x, end_y], tooltip="终点", popup="<b>终\t点</b>").add_to(folium_map)
+        for route in routes:
+            folium_map = m.drawMapLines(route, 'blue', folium_map)
+            # folium_map = m.drawMapLines(route, folium_map)
+        folium_map.save("templates/tmp3.html")
+        m.replaceJsRef("templates/tmp3.html")
+        return render(request, 'tmp3.html')
+
 
 
 ''' 
@@ -2259,7 +2191,7 @@ def logout1(request):
 
 def logout2(request):
     request.session.flush()
-    return render(request, 'add_stu.html')
+    return render(request, 'add_stu_tmp2.html')
 
 
 def render_database(request):
@@ -2272,6 +2204,9 @@ def geo(request):
 
 def temp(request):
     return render(request, 'tmp.html')
+
+def temp2(request):
+    return render(request, 'tmp2.html')
 
 
 def find_road(request):
@@ -2554,7 +2489,7 @@ def summarize(request):
         'd_data': d_data,
         'f_data': f_data,
     }
-    print(context)
+    # print(context)
     return render(request, "summarize.html", context=context)
 
 

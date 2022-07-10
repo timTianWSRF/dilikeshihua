@@ -304,6 +304,7 @@
 	    		//console.log(info[name]);
 
 	    		//遍历所有的
+
 	    		for (var key in info[name]) {
 	    			//类型复杂的不进行显示
 		//		  if(info[name].hasOwnProperty(key))
@@ -966,8 +967,14 @@ layui.use(['tree', 'util'], function(){
         <li class="nav-item">
         <a class="nav-link" href="{% url 'summarize' %}">数据一览</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'add_stu' %}">路径规划</a>
+      <li class="nav-item dropdown">
+        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown">
+            路径规划
+        </a>
+  <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+    <a class="dropdown-item active" href="{% url 'add_stu' %}">军标数据规划</a>
+    <a class="dropdown-item" href="{% url 'findRoad2' %}">经纬度及地点规划</a>
+  </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'find_road' %}">目标定位</a>

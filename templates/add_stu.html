@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +12,11 @@
             background-attachment:fixed;        /* 当内容高度大于图片高度时，背景图像的位置相对于viewport固定 */    //此条属性必须设置否则可能无效/
             background-color:#CCCCCC;
 
-        {#    background-position: center top;#}
+            background-position: center top;
         }
     </style>
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//unpkg.com/layui@2.6.8/dist/css/layui.css">
+    <link rel="stylesheet" href="/static/layui-v2.6.8/layui/css/layui.css">
     <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="/static/js/bootstrap.bundle.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
@@ -152,7 +153,7 @@
 
 #info {
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     right: 30px;
     text-align: right;
     width: 270px;
@@ -177,17 +178,17 @@
 }
 
 
-#search input {
-    position: absolute;
-    top: 220px;
-    right: 60px;
-    color: #fff;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    width: 200px;
-    background-color: #666;
-}
+{##search input {#}
+{#    position: absolute;#}
+{#    top: 220px;#}
+{#    right: 60px;#}
+{#    color: #fff;#}
+{#    border: none;#}
+{#    outline: none;#}
+{#    box-shadow: none;#}
+{#    width: 200px;#}
+{#    background-color: #666;#}
+{#}#}
 
 #cisloading {
     position: fixed;
@@ -237,8 +238,8 @@ layui.use(['tree', 'util'], function(){
 //var checkedList=[];
   //开启复选框
   tree.render({
-      id:'demoo'
-,   elem: '#test5'
+      id:'demoo',
+   elem: '#test5'
     ,data: data2
       ,isJump: true
     ,showCheckbox: false
@@ -247,17 +248,11 @@ layui.use(['tree', 'util'], function(){
 
               let classes = [];
               classes.push(event.data);
-            //  console.log(classes[0]);
-          /*    if(checkData.length==1){
-              for(var item in checkData[0]["children"]){
-          //        console.log(checkData[0]["children"][item]["title"]);
-                  classes.push(checkData[0]["children"][item]["title"]);
-                  console.log(classes);
-              }}*/
+
 
           if (classes[0].children == undefined){
               console.log(classes[0]["title"]);
-              console.log(classes[0]["parent"][0])
+              console.log(classes[0]["parent"][0]);
           }
              $.ajax({
                                   //仅添加删市
@@ -289,9 +284,6 @@ layui.use(['tree', 'util'], function(){
     /* 复选框
     ,oncheck:function (event) {
               event.data.checked = !event.data.checked;
-
-
-
               let checkData = tree.getChecked('demoo');
               let classes = [];
               if(checkData.length==1){
@@ -308,7 +300,6 @@ layui.use(['tree', 'util'], function(){
                                   data :{
                                       'classes': classes.toString()
                                   },
-
                                   success: function (data) {
                                      // alert(data);
                                     //  d3.selectAll("svg").remove();
@@ -317,7 +308,6 @@ layui.use(['tree', 'util'], function(){
                                   error: function (error) {
                                       alert('出错了，请稍后重试')
                                   },
-
                           });
       }*/
   });
@@ -418,6 +408,7 @@ layui.use(['tree', 'util'], function(){
 
     function add_node() {
                 flag = true;
+                alert("请依次选择起始点和终止点。");
 
             }
     var a = new Array();
@@ -426,6 +417,7 @@ layui.use(['tree', 'util'], function(){
     var d = new Array();
     var NearResult;
     function end_node() {
+        alert("节点选择完毕！！");
         $.ajax({
             url:'/../../path',
             type:'POST',
@@ -485,8 +477,8 @@ layui.use(['tree', 'util'], function(){
     }
 
     //第一次获取表格数据填充
-    function opend(){
-        /*   $.ajax({
+    function opend(){
+        /*   $.ajax({
                url: '/../../data',
                                   type : 'POST',
                                   data :{
@@ -501,24 +493,24 @@ layui.use(['tree', 'util'], function(){
            });*/
 
 
-        //弹表格界面
+        //弹表格界面
 
-          layer.open({
-          type: 2
-          ,title:"data" //不显示标题栏
-          ,closeBtn: false
-          ,area: ['90%','95%']
-          ,shade: 0.8
-          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
-          ,btn: ['关闭']
-          ,btnAlign: 'c'
+          layer.open({
+          type: 2
+          ,title:"data" //不显示标题栏
+          ,closeBtn: false
+          ,area: ['90%','95%']
+          ,shade: 0.8
+          ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+          ,btn: ['关闭']
+          ,btnAlign: 'c'
                     ,anim:1
-          ,moveType: 1 //拖拽模式，0或者1
-          //,content: "tablea.html"
+          ,moveType: 1 //拖拽模式，0或者1
+          //,content: "tablea.html"
                    ,content: "{% url 'database' %}"
           });
-      
-    }
+      
+    }
 </script>
 
     <script type="text/javascript" src="../static/dataupdate.js"></script>
@@ -539,8 +531,14 @@ layui.use(['tree', 'util'], function(){
         <li class="nav-item">
         <a class="nav-link" href="{% url 'summarize' %}">数据一览</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'add_stu' %}">路径规划<span class="sr-only">(current)</span></a>
+      <li class="nav-item dropdown">
+        <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown">
+            路径规划
+        </a>
+  <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+    <a class="dropdown-item active" href="{% url 'add_stu' %}">军标数据规划</a>
+    <a class="dropdown-item" href="{% url 'findRoad2' %}">经纬度及地点规划</a>
+  </div>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'find_road' %}">目标定位</a>
@@ -593,60 +591,56 @@ layui.use(['tree', 'util'], function(){
 
     </ul>
 </nav>
+
 <div class="row">
-  <div class="col-sm-2">
-      <p>
-  <a class="btn btn-secondary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    地区选择
-  </a>
-</p>
-<div class="collapse" id="collapseExample">
-    <div class="jumbotron" id="test5"></div>
-<!--<div id="test5" class="text-white" ></div>-->
+    <div class="col-sm-3">
+        <div style="padding: 10px; border: 2px solid darkgrey; background-color: white;" id="search">
+            <input type="search" class="form-control ds-input"  placeholder="地名关键词查询" aria-label="Search for..." autocomplete="off" data-docs-version="4.6" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" style="position: relative; vertical-align: top;" dir="auto">
+        </div>
+        <div style="padding: 10px; border: 2px solid darkgrey; background-color: white;">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-light" onclick="add_node()">路径始末节点选择</button>
+                <button type="button" class="btn btn-light" onclick="end_node()">路径节点选择完毕</button>
+            </div>
+        </div>
 
-</div>
-
-  </div>
-  <div class="col-sm-10">
-      <div id="abc">
-	<!-- 绘制标题样式 -->
-
-	<h1 style="color:#fff;font-size:32px;margin-bottom:0px;text-align:center;margin-left:40px;">地理空间数据组织管理应用</h1>
-
-	<!-- 第一个布局 绘制知识图谱主图 -->
-	<div   style="text-align: center; position:relative;">
+        <div class="jumbotron" style="height: 800px; padding: 10px; border: 2px solid darkgrey; background-color: white; font-size: 20px; overflow: scroll" id="test5">
+        </div>
+        </div>
+    <div class="col-sm-7">
+        <div   style="text-align: center; position:relative;">
 		<svg  width="800" height="560" style="margin-right:80px;margin-bottom:-40px;" id="svg1" >
 
     	</svg>
 
     	<!-- 绘制图例 -->
-		<div id="indicator">
+		<div id="indicator" >
 	    </div>
 
-	    <!-- 绘制模式选择 -->
-	    <div id="mode">
-	    	<span class="active" style="border-top-right-radius:0;border-bottom-right-radius:0;">节点</span>
-            <span style="border-top-left-radius:0;border-bottom-left-radius:0;position:relative;left:-5px;">文字</span>
-
-	    </div>
-
-	    <!-- 绘制搜索框-->
-	    <div id="search">
-			<label>
-				<input type="text" class="form-control" placeholder="地名关键词查询">
-			</label>
-		</div>
+{#	    <!-- 绘制模式选择 -->#}
+{#	    <div id="mode">#}
+{#	    	<span class="active" style="border-top-right-radius:0;border-bottom-right-radius:0;">节点</span>#}
+{#            <span style="border-top-left-radius:0;border-bottom-left-radius:0;position:relative;left:-5px;">文字</span>#}
+{##}
+{#	    </div>#}
+{##}
+{#	    <!-- 绘制搜索框-->#}
+{#	    <div id="search">#}
+{#			<label>#}
+{#				<input type="text" class="form-control" placeholder="地名关键词查询">#}
+{#			</label>#}
+{#		</div>#}
 
 
 	    <!-- 绘制右边显示结果 -->
-	    <div id="info">
-	    	<h4></h4>
-	    </div>
+{#	    <div id="info">#}
+{#	    	<h4></h4>#}
+{#	    </div>#}
 	</div>
 
-	<!-- 第二个布局 下部分时间点 文本居中 相对定位-->
-	<div style="text-align: center; position:relative;">
-		<svg width="960" height="240" style="margin-right:60px;margin-bottom:-40px;" id="svg2">
+        <!-- 第二个布局 下部分时间点 文本居中 相对定位-->
+        <div style="text-align: center; position:relative;">
+		<svg id="svg2">
 			<g></g>
     	</svg>
 	</div>
@@ -654,17 +648,16 @@ layui.use(['tree', 'util'], function(){
     <div id="cisloading">
         <img src="../media/loading.gif" alt="计算中" style="width: 60px;height: auto">
     </div>
-  </div><center>
-          <div class="btn-group" role="group" aria-label="Basic example">
-  <button type="button" class="btn btn-secondary" onclick="add_node()">路径规划节点选择</button>
-  <button type="button" class="btn btn-secondary" onclick="end_node()">路径节点选择完毕</button>
-</div></center>
-<!--     <button type="button" class="layui-btn layui-btn-radius" onclick="add_node()" >路径规划节点选择</button>-->
-<!--      <button type="button" class="layui-btn layui-btn-radius" onclick="end_node()" >路径节点选择完毕</button>-->
-<!--    <button type="button" class="layui-btn layui-btn-radius" onclick="opend()" >知识库综合管理</button>-->
-<!--    <button  type="button" class="layui-btn layui-btn-radius" onclick="notice_open()">目标定位标绘</button>-->
+  </div>
+    <div class="col-sm-2" style="padding: 10px; border: 2px solid darkgrey; background-color: white;">
+        <div id="info">
+	    	<h4></h4>
+	    </div>
+    </div>
+
+    </div>
 </div>
-</div>
+
 
 
 </body>

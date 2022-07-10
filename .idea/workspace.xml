@@ -2,8 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="84a2c210-1617-46a7-8fcf-fc953f471fa7" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../meta-search/flask/query/query - 快捷方式.lnk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../meta-search/flask/templates/search_entity_type.html" beforeDir="false" afterPath="$PROJECT_DIR$/../meta-search/flask/templates/search_entity_type.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/add_stu_tmp2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/path_begin_end.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/path_begin_end_error.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/path_begin_end_tmp.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tmp2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/tmp3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Django_knowledgeGraph.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Django_knowledgeGraph.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django_knowledgeGraph/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django_knowledgeGraph/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KG/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/KG/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KG/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/KG/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.db" beforeDir="false" afterPath="$PROJECT_DIR$/data.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/getdata/t" beforeDir="false" afterPath="$PROJECT_DIR$/media/getdata/t" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/json/dataupdate.json" beforeDir="false" afterPath="$PROJECT_DIR$/media/json/dataupdate.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/json/pro_citys3.json" beforeDir="false" afterPath="$PROJECT_DIR$/media/json/pro_citys3.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/layui-v2.6.8/layui/css/layui.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/layui-v2.6.8/layui/css/layui.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_stu.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_stu.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_stu_tmp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_stu_tmp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/findroad.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/findroad.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/full_kmeans.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/full_kmeans.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/heatmap.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/heatmap.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/inside_heat_map.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/inside_heat_map.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/juece.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/juece.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/kmeans.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/kmeans.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/result_road.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/result_road.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/select.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/select.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/select2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/select2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/summarize.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/summarize.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/test.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/tmp.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tmp.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +83,7 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../meta-search" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="28gSeOzOQwxR5yrdZRBhVgb2zUT" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -67,28 +100,28 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../student_management/student_sys/homework" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.appearance" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\dilikeshihua\templates" />
+      <recent name="D:\dilikeshihua\templates\src" />
+      <recent name="F:\student_management\student_sys\homework" />
+      <recent name="F:\student_management\student_sys\student\static\img" />
+      <recent name="F:\student_management\student_sys\student\static\js" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Django_knowledgeGraph\static" />
       <recent name="D:\Django_knowledgeGraph\templates" />
       <recent name="D:\Django_knowledgeGraph" />
       <recent name="D:\Django_knowledgeGraph\KG" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="F:\student_management\student_sys\homework" />
-      <recent name="F:\student_management\student_sys\student\static\img" />
-      <recent name="F:\student_management\student_sys\student\static\js" />
-      <recent name="F:\student_management\student_sys\student\static\css" />
-      <recent name="F:\meta-search\src" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.SIR">
+  <component name="RunManager" selected="Django server.Django_knowledgeGraph">
     <configuration name="SIR" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="mathModel" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -101,6 +134,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/mathModel/SIR.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -122,6 +156,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/mathModel/day01.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -143,6 +178,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/mathModel/day02.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -164,6 +200,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/mathModel/day03.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -185,6 +222,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../meta-search/flask/manage.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -202,9 +240,9 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="DJANGO_SETTINGS_MODULE" value="Django_knowledgeGraph.settings" />
       </envs>
-      <option name="SDK_HOME" value="F:\Anaconda\envs\pcl\python.exe" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
@@ -219,6 +257,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Django server.Django_knowledgeGraph" />
       <item itemvalue="Python.day01 (1)" />
       <item itemvalue="Python.day02" />
       <item itemvalue="Python.manage" />
@@ -384,11 +423,18 @@
       <workItem from="1652404295893" duration="4367000" />
       <workItem from="1652684912230" duration="1885000" />
       <workItem from="1652750766735" duration="3633000" />
+      <workItem from="1657008639933" duration="2548000" />
+      <workItem from="1657114581953" duration="1227000" />
+      <workItem from="1657115816349" duration="4785000" />
+      <workItem from="1657193529367" duration="4709000" />
+      <workItem from="1657280534381" duration="2558000" />
+      <workItem from="1657283414973" duration="2905000" />
+      <workItem from="1657345308807" duration="8104000" />
+      <workItem from="1657367347946" duration="8023000" />
+      <workItem from="1657420306747" duration="10614000" />
+      <workItem from="1657451813215" duration="1031000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51509000" />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -397,69 +443,107 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="334" y="0" width="624" height="672" key="#Django_knowledgeGraph" timestamp="1657116042766">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="334" y="0" width="624" height="672" key="#Django_knowledgeGraph/0.0.1280.672@0.0.1280.672" timestamp="1657116042766" />
+    <state x="247" y="0" key="#Inspections" timestamp="1657115694492">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="247" y="0" key="#Inspections/0.0.1280.672@0.0.1280.672" timestamp="1657115694492" />
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1657116988675">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="96" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.672@0.0.1280.672" timestamp="1657116988675" />
     <state x="707" y="322" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1654566084621">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="707" y="322" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1654566084621" />
-    <state x="739" y="261" key="FileChooserDialogImpl" timestamp="1654562036865">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="493" y="153" key="FileChooserDialogImpl" timestamp="1657116036849">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state x="493" y="153" key="FileChooserDialogImpl/0.0.1280.672@0.0.1280.672" timestamp="1657116036849" />
     <state x="739" y="261" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1654562036865" />
-    <state width="1899" height="317" key="GridCell.Tab.0.bottom" timestamp="1655804201591">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="159" key="GridCell.Tab.0.bottom" timestamp="1657451834518">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="159" key="GridCell.Tab.0.bottom/0.0.1280.672@0.0.1280.672" timestamp="1657451834518" />
     <state width="1899" height="317" key="GridCell.Tab.0.bottom/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655189502359" />
     <state width="1899" height="317" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1655804201591" />
-    <state width="1899" height="317" key="GridCell.Tab.0.center" timestamp="1655804201590">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="159" key="GridCell.Tab.0.center" timestamp="1657451834517">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="159" key="GridCell.Tab.0.center/0.0.1280.672@0.0.1280.672" timestamp="1657451834517" />
     <state width="1899" height="317" key="GridCell.Tab.0.center/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655189502359" />
     <state width="1899" height="317" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1655804201590" />
-    <state width="1899" height="317" key="GridCell.Tab.0.left" timestamp="1655804201590">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="159" key="GridCell.Tab.0.left" timestamp="1657451834515">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="159" key="GridCell.Tab.0.left/0.0.1280.672@0.0.1280.672" timestamp="1657451834515" />
     <state width="1899" height="317" key="GridCell.Tab.0.left/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655189502359" />
     <state width="1899" height="317" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1655804201590" />
-    <state width="1899" height="317" key="GridCell.Tab.0.right" timestamp="1655804201591">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="159" key="GridCell.Tab.0.right" timestamp="1657451834518">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="159" key="GridCell.Tab.0.right/0.0.1280.672@0.0.1280.672" timestamp="1657451834518" />
     <state width="1899" height="317" key="GridCell.Tab.0.right/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655189502359" />
     <state width="1899" height="317" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1655804201591" />
-    <state width="1899" height="323" key="GridCell.Tab.1.bottom" timestamp="1655267390332">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="542" key="GridCell.Tab.1.bottom" timestamp="1657353433091">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="542" key="GridCell.Tab.1.bottom/0.0.1280.672@0.0.1280.672" timestamp="1657353433091" />
     <state width="1899" height="323" key="GridCell.Tab.1.bottom/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655178600918" />
     <state width="1899" height="323" key="GridCell.Tab.1.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1655267390332" />
-    <state width="1899" height="323" key="GridCell.Tab.1.center" timestamp="1655267390331">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="542" key="GridCell.Tab.1.center" timestamp="1657353433091">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="542" key="GridCell.Tab.1.center/0.0.1280.672@0.0.1280.672" timestamp="1657353433091" />
     <state width="1899" height="323" key="GridCell.Tab.1.center/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655178600918" />
     <state width="1899" height="323" key="GridCell.Tab.1.center/0.0.1920.1040@0.0.1920.1040" timestamp="1655267390331" />
-    <state width="1899" height="323" key="GridCell.Tab.1.left" timestamp="1655267390331">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="542" key="GridCell.Tab.1.left" timestamp="1657353433091">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="542" key="GridCell.Tab.1.left/0.0.1280.672@0.0.1280.672" timestamp="1657353433091" />
     <state width="1899" height="323" key="GridCell.Tab.1.left/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655178600917" />
     <state width="1899" height="323" key="GridCell.Tab.1.left/0.0.1920.1040@0.0.1920.1040" timestamp="1655267390331" />
-    <state width="1899" height="323" key="GridCell.Tab.1.right" timestamp="1655267390332">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1237" height="542" key="GridCell.Tab.1.right" timestamp="1657353433091">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="1237" height="542" key="GridCell.Tab.1.right/0.0.1280.672@0.0.1280.672" timestamp="1657353433091" />
     <state width="1899" height="323" key="GridCell.Tab.1.right/0.0.1920.1040/4.1080.1920.1040@4.1080.1920.1040" timestamp="1655178600918" />
     <state width="1899" height="323" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1655267390332" />
     <state x="830" y="230" key="RollbackChangesDialog" timestamp="1654488265818">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="830" y="230" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1654488265818" />
-    <state x="461" y="162" key="SettingsEditor" timestamp="1654562096879">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="269" y="0" key="SettingsEditor" timestamp="1657115783595">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state x="269" y="0" key="SettingsEditor/0.0.1280.672@0.0.1280.672" timestamp="1657115783595" />
     <state x="461" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1654562096879" />
     <state width="498" height="446" key="SwitcherDM" timestamp="1653113634798">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="498" height="446" key="SwitcherDM/0.0.1920.1040@0.0.1920.1040" timestamp="1653113634798" />
-    <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1655253222882">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="647" height="343" key="XDebugger.FullValuePopup" timestamp="1657351275155">
+      <screen x="0" y="0" width="1280" height="672" />
     </state>
+    <state width="647" height="343" key="XDebugger.FullValuePopup/0.0.1280.672@0.0.1280.672" timestamp="1657351275155" />
+    <state x="735" y="145" width="672" height="439" key="search.everywhere.popup" timestamp="1657452703079">
+      <screen x="0" y="0" width="1280" height="672" />
+    </state>
+    <state x="735" y="145" width="672" height="439" key="search.everywhere.popup/0.0.1280.672@0.0.1280.672" timestamp="1657452703079" />
     <state x="1103" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1655253222882" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/KG/views.py</url>
+          <line>1138</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

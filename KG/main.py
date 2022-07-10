@@ -230,7 +230,7 @@ def readFuPo(dbName):
     con = sqlite3.connect(dbName)  # 连接桥
     # print("Open database successfully")  # 打开成功
     cur = con.cursor()
-    sql1 = "sELECT ZNUM As fuPoiD, ZZX aS x,ZZY aS y fROM DN05490062_FZB FZB wHere leibie='A'"
+    sql1 = "SELECT ZNUM As fuPoiD, ZZX aS x,ZZY aS y fROM DN05490062_FZB FZB wHere leibie='A'"
     cur.execute(sql1)
     FuPoDict = dict()
     FuPoList = []
@@ -809,8 +809,8 @@ def drawHeatMapCenter(start_coords):
     return folium_map
 
 # 画线
-def drawMapLines(points, folium_map):
-    folium.PolyLine(points, color='blue').add_to(folium_map)
+def drawMapLines(points, color, folium_map):
+    folium.PolyLine(points, color=color).add_to(folium_map)
     return folium_map
 
 
@@ -896,7 +896,16 @@ def CGCS2WSG(X, Y):
         return B, L
 
 
-# 坐标转化
+def WSG2GSJ(x, y):
+    response = requests.get(
+        'https://api.map.baidu.com/geoconv/v1/?coords=' + str(x) + ',' + str(
+            y) + '&from=1&to=3&ak=V9pGzEIigoQqQyGMG4v4C1qqbTl7vccz&output=json')
+    xx = json.loads(response.text)["result"][0]['x']
+    yy = json.loads(response.text)["result"][0]['y']
+    return xx, yy
+
+
+# 坐标转化 CGCS2000转GCJ火星坐标系
 def CGCS2GSJ(x, y):
     tmp_x, tmp_y = CGCS2WSG(x, y)
     X = tmp_x[1] + tmp_x[2] / 60 + tmp_x[3] / 3600
@@ -951,6 +960,225 @@ def findWay(origin, destination):
         # print('')
 
     return result
+
+
+# 传入的是2000坐标
+def findWay2(origin, destination):
+    origin_x, origin_y = CGCS2GSJ(origin[0] + 2192935.10, origin[1] + 19472810.74)
+    destination_x, destination_y = CGCS2GSJ(destination[0] + 2192935.10, destination[1] + 19472810.74)
+    origin_x = round(origin_x, 6)  # 保留六位
+    origin_y = round(origin_y, 6)
+    destination_x = round(destination_x, 6)
+    destination_y = round(destination_y, 6)
+
+    # response = requests.get(
+    #     'https://restapi.amap.com/v3/direction/walking?origin=' + str(origin_y) + ',' + str(origin_x) + '&destination=' + str(destination_y) + ',' + str(destination_x) + '&key=95cf688505e14a1d92a0c76a730c1b9d'
+    # )
+
+    # 步行
+    response1 = requests.get(
+        'https://restapi.amap.com/v3/direction/walking?origin=' + str(origin_y) + ',' + str(
+            origin_x) + '&destination=' + str(destination_y) + ',' + str(
+            destination_x) + '&key=95cf688505e14a1d92a0c76a730c1b9d'
+    )
+
+
+    # 驾车策略  (速度优先，不一定是距离最短)
+    # https://restapi.amap.com/v3/direction/driving?origin=116.481028,39.989643&destination=116.465302,40.004717&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=0
+    response2 = requests.get(
+        'https://restapi.amap.com/v3/direction/driving?origin=' + str(origin_y) + ',' + str(origin_x) + '&destination='+ str(destination_y) + ',' + str(destination_x) +'&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=0'
+    )
+
+    # 驾车策略  (距离最短路线，其中穿插小路，可能存在埋伏)
+    response3 = requests.get(
+        'https://restapi.amap.com/v3/direction/driving?origin=' + str(origin_y) + ',' + str(
+            origin_x) + '&destination=' + str(destination_y) + ',' + str(
+            destination_x) + '&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=2'
+    )
+
+    # 驾车策略  (不走高速国道，避免较大的路段)
+    response4 = requests.get(
+        'https://restapi.amap.com/v3/direction/driving?origin=' + str(origin_y) + ',' + str(origin_x) + '&destination='+ str(destination_y) + ',' + str(destination_x) +'&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=7'
+    )
+
+    # 处理第一条路经
+    List = json.loads(response1.text)["route"]["paths"][0]["steps"]
+    # result是最终返回结果
+    result = []
+    for line in List:
+        # one_of_routes是一个列表，每一项都是一条完整的路
+        print("------------------------------------------------------------")
+        print(line)
+        one_of_routes = line["polyline"].split(';')
+        print(one_of_routes)
+        route = []
+        for point_of_one_route in one_of_routes:
+            point = point_of_one_route.split(',')[::-1]
+            print(point)
+            route.append(castStringListToFloatList(point))
+        result.append(route)
+        print(route)
+        print("----------------------------------------------------------")
+        # print('')
+
+    # 处理第二条路径
+    List2 = json.loads(response2.text)["route"]["paths"][0]["steps"]
+    result2 = []
+    for line in List2:
+        # one_of_routes是一个列表，每一项都是一条完整的路
+        print("------------------------------------------------------------")
+        print(line)
+        one_of_routes = line["polyline"].split(';')
+        print(one_of_routes)
+        route = []
+        for point_of_one_route in one_of_routes:
+            point = point_of_one_route.split(',')[::-1]
+            print(point)
+            route.append(castStringListToFloatList(point))
+        result2.append(route)
+        print(route)
+        print("----------------------------------------------------------")
+        # print('')
+
+    List3 = json.loads(response3.text)["route"]["paths"][0]["steps"]
+    result3 = []
+    for line in List3:
+        # one_of_routes是一个列表，每一项都是一条完整的路
+        print("------------------------------------------------------------")
+        print(line)
+        one_of_routes = line["polyline"].split(';')
+        print(one_of_routes)
+        route = []
+        for point_of_one_route in one_of_routes:
+            point = point_of_one_route.split(',')[::-1]
+            print(point)
+            route.append(castStringListToFloatList(point))
+        result3.append(route)
+        print(route)
+        print("----------------------------------------------------------")
+        # print('')
+
+    List4 = json.loads(response4.text)["route"]["paths"][0]["steps"]
+    result4 = []
+    for line in List4:
+        # one_of_routes是一个列表，每一项都是一条完整的路
+        print("------------------------------------------------------------")
+        print(line)
+        one_of_routes = line["polyline"].split(';')
+        print(one_of_routes)
+        route = []
+        for point_of_one_route in one_of_routes:
+            point = point_of_one_route.split(',')[::-1]
+            print(point)
+            route.append(castStringListToFloatList(point))
+        result4.append(route)
+        print(route)
+        print("----------------------------------------------------------")
+        # print('')
+    return result, result2, result3, result4
+
+
+# 传入的是大地坐标
+def findWay3(origin, destination, choice):
+    origin_y, origin_x = WSG2GSJ(origin[0], origin[1])
+    destination_y, destination_x = WSG2GSJ(destination[0], destination[1])
+    origin_x = round(origin_x, 6)  # 保留六位
+    origin_y = round(origin_y, 6)
+    destination_x = round(destination_x, 6)
+    destination_y = round(destination_y, 6)
+
+
+    if choice == '1':
+        # 处理第一条路经:步行
+        response = requests.get(
+            'https://restapi.amap.com/v3/direction/walking?origin=' + str(origin_y) + ',' + str(
+                origin_x) + '&destination=' + str(destination_y) + ',' + str(
+                destination_x) + '&key=95cf688505e14a1d92a0c76a730c1b9d'
+        )
+
+        try:
+            List = json.loads(response.text)["route"]["paths"][0]["steps"]
+        except KeyError:
+            return False
+
+        # result是最终返回结果
+        result = []
+        for line in List:
+            # one_of_routes是一个列表，每一项都是一条完整的路
+            one_of_routes = line["polyline"].split(';')
+            route = []
+            for point_of_one_route in one_of_routes:
+                point = point_of_one_route.split(',')[::-1]
+                route.append(castStringListToFloatList(point))
+            result.append(route)
+        return result
+
+    elif choice == '2':
+        # 处理第二条路经:驾车策略  (速度优先，不一定是距离最短)
+        response = requests.get(
+            'https://restapi.amap.com/v3/direction/driving?origin=' + str(origin_y) + ',' + str(
+                origin_x) + '&destination=' + str(destination_y) + ',' + str(
+                destination_x) + '&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=0'
+        )
+
+        List = json.loads(response.text)["route"]["paths"][0]["steps"]
+
+        # result是最终返回结果
+        result = []
+        for line in List:
+            # one_of_routes是一个列表，每一项都是一条完整的路
+            one_of_routes = line["polyline"].split(';')
+            route = []
+            for point_of_one_route in one_of_routes:
+                point = point_of_one_route.split(',')[::-1]
+                route.append(castStringListToFloatList(point))
+            result.append(route)
+        return result
+
+    elif choice == '3':
+        # 处理第三条路经:驾车策略  (距离最短路线，其中穿插小路，可能存在埋伏)
+        response = requests.get(
+            'https://restapi.amap.com/v3/direction/driving?origin=' + str(origin_y) + ',' + str(
+                origin_x) + '&destination=' + str(destination_y) + ',' + str(
+                destination_x) + '&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=2'
+        )
+
+        List = json.loads(response.text)["route"]["paths"][0]["steps"]
+
+        # result是最终返回结果
+        result = []
+        for line in List:
+            # one_of_routes是一个列表，每一项都是一条完整的路
+            one_of_routes = line["polyline"].split(';')
+            route = []
+            for point_of_one_route in one_of_routes:
+                point = point_of_one_route.split(',')[::-1]
+                route.append(castStringListToFloatList(point))
+            result.append(route)
+        return result
+
+    elif choice == '4':
+        # 处理第四条路经:驾车策略  (不走高速国道，避免较大的路段)
+        response = requests.get(
+            'https://restapi.amap.com/v3/direction/driving?origin=' + str(origin_y) + ',' + str(origin_x) + '&destination='+ str(destination_y) + ',' + str(destination_x) +'&extensions=all&output=json&key=95cf688505e14a1d92a0c76a730c1b9d&strategy=7'
+        )
+
+        List = json.loads(response.text)["route"]["paths"][0]["steps"]
+
+        # result是最终返回结果
+        result = []
+        for line in List:
+            # one_of_routes是一个列表，每一项都是一条完整的路
+            one_of_routes = line["polyline"].split(';')
+            route = []
+            for point_of_one_route in one_of_routes:
+                point = point_of_one_route.split(',')[::-1]
+                route.append(castStringListToFloatList(point))
+            result.append(route)
+        return result
+
+
+
 
 
 # K-Means

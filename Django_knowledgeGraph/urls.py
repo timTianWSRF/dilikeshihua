@@ -26,13 +26,13 @@ urlpatterns = [
     # 子路由添加
     # html界面路由
     url(r'^admin', admin.site.urls),
-    url(r'^adata', views.adata),
+    url(r'^db/adata', views.adata),
     url(r'^add_stu/$', views.main, name='add_stu'),
     url(r'^select/$', views.home, name='select'),
     url(r'^database', views.datapage),
     url(r'^draw_geo', views.draw_geo),
     url(r'^tmp', views.draw_map),
-    url(r'^edit', views.edit),
+    url(r'^db/edit', views.edit),
     url(r'^PathResult', views.PathResult),
 
     # ajax传参路由
@@ -43,7 +43,7 @@ urlpatterns = [
     url('setele$', views.setele),
     url('data$', views.data),
     url('aim1$', views.aim1, name="aim"),
-    url('add$', views.add),
+    url('add$', views.add, name="add"),
     url('delete$', views.delete),
     url('update$', views.updata),
     url('addpagecol$', views.addpagecol),
@@ -51,7 +51,7 @@ urlpatterns = [
     url(r'^select/aim.txt/$', views.aim),
     url(r'^logout1/aim.txt/$', views.aim),
     url(r'^logout2/aim.txt/$', views.aim),
-    url(r'^database/$', views.render_database, name="database"),
+    url(r'^db/$', views.render_database, name="database"),
     # url(r'^select/database/', views.render_database),
     # url(r'^logout1/database/', views.render_database),
     # url(r'^logout2/database/', views.render_database),
@@ -63,6 +63,7 @@ urlpatterns = [
     url(r'^logout2/$', views.logout2),
     url(r'^geo/$', views.geo, name="geo"),
     url(r'^temp/$', views.temp, name="temp"),
+    url(r'^temp2/$', views.temp2, name="temp2"),
     url(r'^findroad/$', views.find_road, name="find_road"),
     url(r'^kmeans/$', views.web_k_means, name="k_means"),
     url(r'^kmeanside/$', views.web_inside_k_means, name="KMEANS"),
@@ -72,6 +73,7 @@ urlpatterns = [
     url(r'^summarize/$', views.summarize, name="summarize"),
     url(r'^fuzhujuece/$', views.fuzhujuece, name="fuzhujuece"),
     url(r'^fzjc/$', views.fzjc, name="fzjc"),
+    url(r'^findroad2/$', views.find_road_2, name="findRoad2"),
 
 
 
